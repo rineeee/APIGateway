@@ -20,25 +20,7 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
 
     @Override
     public GatewayFilter apply(Config config) {
-//        // Custom pre Filter
-//        return (exchange, chain) -> {
-//            ServerHttpRequest request = exchange.getRequest();
-//            ServerHttpResponse response = exchange.getResponse();
-//
-//            log.info("Global Filter baseMessage: {}", config.getBaseMessage());
-//
-//            if(config.isPreLogger()){
-//                log.info("Global Filter Start: request id -> {}", request.getId());
-//            }
-//            //Custom Post Filter
-//            //Mono : 단일 값
-//            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-//                if(config.isPreLogger()){
-//                    log.info("Global Filter End: response -> code -> {}", response.getStatusCode());
-//                }
-//            }));
-//        };
-        GatewayFilter filter = new OrderedGatewayFilter((exchange, chain) -> {
+        return new OrderedGatewayFilter((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             ServerHttpResponse response = exchange.getResponse();
 
@@ -55,8 +37,6 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
                 }
             }));
         }, Ordered.LOWEST_PRECEDENCE);
-
-        return filter;
     }
 
     @Data
