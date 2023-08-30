@@ -1,6 +1,7 @@
 # APIGateway
 
 [MSA PROJECT] E-cart의 API Gateway
+![Uploading api-gateway.png…]()
 
 - Discovery
   - Eureka Client
